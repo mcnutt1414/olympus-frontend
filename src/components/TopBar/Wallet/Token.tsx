@@ -1,15 +1,22 @@
-import { useState } from "react";
+import { t } from "@lingui/macro";
 import {
+  Accordion as MuiAccordion,
+  AccordionDetails,
+  AccordionSummary as MuiAccordionSummary,
+  Box,
   Button,
   Typography,
-  Box,
-  Accordion as MuiAccordion,
-  AccordionSummary as MuiAccordionSummary,
-  AccordionDetails,
-  withStyles,
   useTheme,
+  withStyles,
 } from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
+import { Icon, OHMTokenProps, Token as TokenSVG } from "@olympusdao/component-library";
+import { ChangeEvent, useState } from "react";
+import { useQuery } from "react-query";
+import { addresses, NETWORKS } from "src/constants";
+import { NetworkId } from "src/constants";
+import { formatCurrency } from "src/helpers";
+import { segmentUA } from "src/helpers/userAnalyticHelpers";
 import { useAppSelector } from "src/hooks";
 import { useWeb3Context } from "src/hooks/web3Context";
 import { addresses, NETWORKS } from "src/constants";
@@ -94,7 +101,7 @@ const addTokenToWallet = async (token: IToken, userAddress: string) => {
 
 interface TokenProps extends IToken {
   expanded: boolean;
-  onChangeExpanded: (event: React.ChangeEvent<{}>, isExpanded: boolean) => void;
+  onChangeExpanded: (event: ChangeEvent<any>, isExpanded: boolean) => void;
   onAddTokenToWallet: () => void;
   decimals: number;
 }
